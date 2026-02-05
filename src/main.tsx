@@ -2,9 +2,10 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Root from "./App";
-import { AuthGuard } from "./AuthGuard";
+import { createAuthGuard } from "./AuthGuard";
 import State from "./State";
 
+const SecuredState = createAuthGuard(State);
 const router = createBrowserRouter([
   {
     path: "/",
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/secured",
-        element: <AuthGuard component={State} />,
+        element: <SecuredState />,
       },
       {
         path: "/vanilla",
